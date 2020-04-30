@@ -51,13 +51,13 @@ object Utils {
    }
   */
 
-  @volatile private var seedUniquifier = 8682522807148012L
+  private var seedUniquifier = 8682522807148012L
 
   def intFromTime(time: Long = System.nanoTime) : Int = {
     longFromTime(time).toInt
   }
 
-  def longFromTime(time: Long = System.nanoTime) : Long = {
+  def longFromTime(time: Long = System.nanoTime) : Long = synchronized {
     seedUniquifier += 1
     (seedUniquifier + time)
   }
